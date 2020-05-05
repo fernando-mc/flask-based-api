@@ -3,7 +3,6 @@ from flask import request
 from entities import customers
 from entities import surveys
 from entities import responses
-from serverless_sdk import tag_event
 
 app = Flask(__name__)
 
@@ -16,13 +15,7 @@ def create_customer():
 
 @app.route("/customer/<customer_id>", methods=['GET'])
 def get_customer(customer_id):
-    tag_event(
-        'customer_id',
-        customer_id,
-        { 'more': 'data', 'with': 'the tag' }
-    )
     return customers.get(customer_id)
-    
 
 
 @app.route("/customer/<customer_id>/surveys", methods=['GET'])
